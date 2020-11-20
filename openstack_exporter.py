@@ -6,14 +6,7 @@ import openstack
 import datetime
 
 def openstack_connection():
-    conn = openstack.connect(
-        auth_url=os.environ["OS_AUTH_URL"],
-        project_name=os.environ["OS_PROJECT_NAME"],
-        username=os.environ["OS_USERNAME"],
-        password=os.environ["OS_PASSWORD"],
-        user_domain=os.environ["OS_USER_DOMAIN_NAME"],
-        # cacert=os.environ["OS_CACERT"],
-    )
+    conn = openstack.connect(cloud='envvars')
     return conn
 
 def generate_hypervisor_metrics(connection, hypervisor_running_vms, hypervisor_used_ram_mb, hypervisor_total_ram_mb, hypervisor_free_cpus, hypervisor_total_cpus, hypervisor_enabled, hypervisor_up):
