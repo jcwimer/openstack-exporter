@@ -8,4 +8,7 @@ RUN pip install -r /tmp/requirements.txt
 ###
 WORKDIR /python
 COPY . .
+
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONIOENCODING=UTF-8
 CMD ["python", "/python/openstack_exporter.py"]
