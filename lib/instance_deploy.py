@@ -101,6 +101,7 @@ def get_metrics(connection, flavor, image, network, cloud_name):
 
     for hypervisor in connection.list_hypervisors():
         availability_zone = str(f"nova:{hypervisor.name}")
+        cleanup(connection, f"{hypervisor.name}-metric")
         start_time = datetime.datetime.now()
         if create_instance(connection, instance_flavor, instance_image, instance_network, hypervisor.name) is True:
             end_time = datetime.datetime.now()
