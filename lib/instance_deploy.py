@@ -6,7 +6,7 @@ import datetime
 import traceback
 import prometheus_client as prom
 
-instance_deploy_metrics = prom.Gauge('openstack_instance_deploy_seconds_to_ping', 'Time to deploy an instance and ping it.', ['hypervisor_hostname'])
+instance_deploy_metrics = prom.Gauge('openstack_instance_deploy_seconds_to_ping', 'Time to deploy an instance and ping it.', ['hypervisor_hostname','cloud_name'])
 
 def run_pings(ip_address):
     try:
@@ -94,7 +94,7 @@ def create_instance(connection, flavor, image, network, hypervisor):
         print(traceback.print_exc())
         cleanup(connection, f"{instance_name}")
 
-def get_metrics(connection, flavor, image, network):
+def get_metrics(connection, flavor, image, network, cloud_name):
     instance_image = get_image(connection, image)
     instance_flavor = get_flavor(connection, flavor)
     instance_network = get_network(connection, network)
@@ -107,5 +107,5 @@ def get_metrics(connection, flavor, image, network):
             time_took = end_time - start_time
             seconds_took = time_took.seconds
             print(f'Instance creation on {hypervisor.name} took {seconds_took} seconds.')
-            instance_deploy_metrics.labels(f'{hypervisor.name}').set(seconds_took)
+            instance_deploy_metrics.labels(f'{hypervisor.name}',cloud_name).set(seconds_took)
         cleanup(connection, f"{hypervisor.name}-metric")

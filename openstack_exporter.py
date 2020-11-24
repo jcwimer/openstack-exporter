@@ -83,12 +83,12 @@ if __name__ == '__main__':
         try:
             print("Gathering metrics...")
             connection = openstack_connection()
-            api_metrics.generate_nova_metrics(connection)
-            api_metrics.generate_neutron_metrics(connection)
-            api_metrics.generate_cinder_metrics(connection)
-            hypervisor_metrics.generate_hypervisor_metrics(connection)
+            api_metrics.generate_nova_metrics(connection,args.cloud_name)
+            api_metrics.generate_neutron_metrics(connection,args.cloud_name)
+            api_metrics.generate_cinder_metrics(connection,args.cloud_name)
+            hypervisor_metrics.generate_hypervisor_metrics(connection,args.cloud_name)
             if args.instancedeploy and args.flavor and args.image and args.network:
-                instance_deploy.get_metrics(connection, args.flavor, args.image, args.network)
+                instance_deploy.get_metrics(connection, args.flavor, args.image, args.network,args.cloud_name)
             if args.horizon_url is not None:
                 horizon.get_metrics(args.horizon_url, args.cloud_name)
             connection.close()
