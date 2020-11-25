@@ -643,7 +643,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "openstack_api_response_seconds{exported_job=\"openstack_horizon_api\", app=\"horizon\", cloud=\"$cloud\"}",
+          "expr": "openstack_horizon_response_seconds{cloud_name=\"$cloud\"}",
           "instant": false,
           "refId": "A"
         }
