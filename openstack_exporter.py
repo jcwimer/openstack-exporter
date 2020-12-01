@@ -91,10 +91,11 @@ if __name__ == '__main__':
                 instance_deploy.get_metrics(connection, args.flavor, args.image, args.network,args.cloud_name)
             if args.horizon_url is not None:
                 horizon.get_metrics(args.horizon_url, args.cloud_name)
-            connection.close()
             print("Waiting 30 seconds to gather more metrics.")
             time.sleep(30)
         except Exception:
             print(traceback.print_exc())
             print("Waiting 30 seconds to gather more metrics.")
             time.sleep(30)
+        finally:
+            connection.close()
