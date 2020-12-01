@@ -4,13 +4,17 @@ import openstack
 import time
 import argparse
 import sys
+import os
 from lib import instance_deploy
 from lib import api_metrics
 from lib import hypervisor_metrics
 from lib import horizon
 
 def openstack_connection():
-    conn = openstack.connect(cloud='envvars')
+    if os.environ.get('OS_CLOUD_NAME') is not None:
+        conn = openstack.connect(cloud=os.environ.get('OS_CLOUD_NAME'))
+    else:
+        conn = openstack.connect(cloud='envvars')
     return conn
 
 # Set up argparse
