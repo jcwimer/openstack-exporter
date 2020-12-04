@@ -36,7 +36,7 @@ openstack_api_status{api_name="horizon",cloud_name="CLOUD_NAME"}
 # Information
 ### Standard Metrics Provided
 | Metric | Metric Labels | Description|
-|-----|-----|-----|
+| :--- | :--- | :--- |
 | `openstack_api_response_seconds` | `{api_name="API_NAME",cloud_name="CLOUD_NAME"}` | Seconds for the api to respond via openstack sdk. nova, neutron, and cinder are currently recorded. |
 | `openstack_api_status` | `{api_name="API_NAME",cloud_name="CLOUD_NAME"}` | Status of the openstack api. 1 = up 0 = down. nova, neutron, and cinder are currently recorded. |
 | `openstack_hypervisor_running_vms` | `{hypervisor_hostname="HYPERVISOR_NAME",cloud_name="CLOUD_NAME",aggregate="AGGREGATE_NAME"}` | Number of running VMs on every hypervisor in the region. |
@@ -51,7 +51,7 @@ openstack_api_status{api_name="horizon",cloud_name="CLOUD_NAME"}
 
 ### Optional Metrics (use flags when running)
 | Metric | Metrics Labels | Description |
-|-----|-----|-----|
+| :--- | :--- | :--- |
 |`openstack_instance_deploy_seconds_to_ping` | `{hypervisor_hostname="HYPERVISOR_NAME",cloud_name="CLOUD_NAME"}` | Seconds from deploy command to ping when creating an instance for every hypervisor in the region. Requires --flavor, --image, --network, and --instance_deploy flags. The network used needs to have TCP port 22 (uses TCP instead of ICMP to ping) open in the default security group. |
 |`openstack_horizon_response_seconds` | `{cloud_name="CLOUD_NAME"}` | Seconds it takes for Chromium to log into Horizon. Requires --horizon_url flag. |
 |`openstack_horizon_status` | `{cloud_name="CLOUD_NAME"}` | Horizon status. 1 = up 0 = down. Requires --horizon_url flag. |
