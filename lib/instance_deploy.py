@@ -60,10 +60,10 @@ def get_network(connection, network):
         return None
 
 def cleanup(connection, instance_name):
-    print(f"Cleaning up {instance_name} instance.")
-    server = connection.compute.find_server(instance_name)
+    print(f"Cleaning up all instances with the name {instance_name}.")
+    servers = connection.compute.servers(all_projects=True,name=instance_name)
 
-    if server:
+    for server in servers:
         try:
             connection.compute.delete_server(server.id)
         except:
