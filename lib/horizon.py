@@ -70,7 +70,7 @@ def get_metrics(horizon_url,cloud_name):
         api_status.labels(cloud_name).set(1)
     except:
         print("Timed out waiting for login to load")
-        api_status.labels(cloud_name).set(1)
+        api_status.labels(cloud_name).set(0)
 
     finally:
         driver.quit()
