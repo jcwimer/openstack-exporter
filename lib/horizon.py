@@ -14,6 +14,31 @@ openstack_password = os.getenv('OS_PASSWORD')
 api_metrics = prom.Gauge('openstack_horizon_response_seconds', 'Time for horizon login via Chrome.', ['cloud_name'])
 api_status = prom.Gauge('openstack_horizon_status', 'Horizon current status. 1 = up 0 = down.',['cloud_name'])
 
+def quit_driver_and_reap_children(driver):
+    # inside docker, driver.quit() leaves behind defunct pids
+    # this can cause your system to run out of processes
+    # docker exec -it container_name ps -ef
+    # will show many defunct Chromium processes
+    print('Quitting session: %s' % driver.session_id)
+    driver.quit()
+    try:
+        pid = True
+        while pid:
+            pid = os.waitpid(-1, os.WNOHANG)
+            print("Reaped child: %s" % str(pid))
+
+            #Solution to avoid infinite loop cause pid value -> (0, 0)
+            try:
+                if pid[0] == 0:
+                    pid = False
+            except:
+                pass
+            #---- ----
+
+    except ChildProcessError:
+        pass
+
+
 def get_metrics(horizon_url,cloud_name):
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = "/usr/bin/chromium"
@@ -73,4 +98,5 @@ def get_metrics(horizon_url,cloud_name):
         api_status.labels(cloud_name).set(0)
 
     finally:
-        driver.quit()
+        print("Closing chrome")
+        quit_driver_and_reap_children(driver)
