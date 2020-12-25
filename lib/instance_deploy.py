@@ -83,7 +83,17 @@ def create_instance(connection, flavor, image, network, hypervisor):
             name=f"{instance_name}",
             availability_zone=availability_zone,
         )
-        server = connection.compute.wait_for_server(server, status="ACTIVE", wait=600)
+        server = connection.compute.wait_for_server(
+            server, 
+            status="ACTIVE", 
+            wait=600,
+            failures=[
+                "ERROR",
+                "PAUSED",
+                "SUSPENDED",
+                "UNKNOWN",
+            ],
+        )
         ip_address = server.addresses[network.name][0]['addr']
         if wait_for_ping(ip_address) is True:
             return True
