@@ -37,7 +37,7 @@ openstack_api_status{api_name="horizon",cloud_name="CLOUD_NAME"}
 ### Standard Metrics Provided
 | Metric | Metric Labels | Description|
 | :--- | :--- | :--- |
-| `openstack_api_response_seconds` | `{api_name="API_NAME",cloud_name="CLOUD_NAME"}` | Seconds for the api to respond via openstack sdk. nova, neutron, and cinder are currently recorded. |
+| `openstack_api_response_milliseconds` | `{api_name="API_NAME",cloud_name="CLOUD_NAME"}` | Milliseconds for the api to respond via openstack sdk. nova, neutron, and cinder are currently recorded. |
 | `openstack_api_status` | `{api_name="API_NAME",cloud_name="CLOUD_NAME"}` | Status of the openstack api. 1 = up 0 = down. nova, neutron, and cinder are currently recorded. |
 | `openstack_hypervisor_running_vms` | `{hypervisor_hostname="HYPERVISOR_NAME",cloud_name="CLOUD_NAME",aggregate="AGGREGATE_NAME"}` | Number of running VMs on every hypervisor in the region. |
 | `openstack_hypervisor_used_ram_mb` | `{hypervisor_hostname="HYPERVISOR_NAME",cloud_name="CLOUD_NAME",aggregate="AGGREGATE_NAME"}` | Amount of RAM in MB used (as reported by nova-compute) for every hypervisor in the region. |

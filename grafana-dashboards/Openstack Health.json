@@ -64,7 +64,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1606267613619,
+  "iteration": 1608835196471,
   "links": [],
   "panels": [
     {
@@ -361,7 +361,7 @@
         "#d44a3a"
       ],
       "datasource": "${DS_PROMETHEUS}",
-      "format": "none",
+      "format": "ms",
       "gauge": {
         "maxValue": 100,
         "minValue": 0,
@@ -393,7 +393,7 @@
       "nullPointMode": "connected",
       "nullText": null,
       "options": {},
-      "postfix": " Seconds",
+      "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
       "prefixFontSize": "50%",
@@ -409,12 +409,12 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "openstack_api_response_seconds{api_name=\"nova\", cloud_name=\"$cloud\"}",
+          "expr": "openstack_api_response_milliseconds{api_name=\"nova\", cloud_name=\"$cloud\"}",
           "instant": false,
           "refId": "A"
         }
       ],
-      "thresholds": "5,10",
+      "thresholds": "5000,10000",
       "timeFrom": null,
       "timeShift": null,
       "title": "Nova API Avg Response Time",
@@ -439,7 +439,8 @@
         "#d44a3a"
       ],
       "datasource": "${DS_PROMETHEUS}",
-      "format": "none",
+      "decimals": null,
+      "format": "ms",
       "gauge": {
         "maxValue": 100,
         "minValue": 0,
@@ -471,7 +472,7 @@
       "nullPointMode": "connected",
       "nullText": null,
       "options": {},
-      "postfix": " Seconds",
+      "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
       "prefixFontSize": "50%",
@@ -487,12 +488,12 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "openstack_api_response_seconds{api_name=\"neutron\", cloud_name=\"$cloud\"}",
+          "expr": "openstack_api_response_milliseconds{api_name=\"neutron\", cloud_name=\"$cloud\"}",
           "instant": false,
           "refId": "A"
         }
       ],
-      "thresholds": "5,10",
+      "thresholds": "5000,10000",
       "timeFrom": null,
       "timeShift": null,
       "title": "Neutron API Avg Response Time",
@@ -517,7 +518,7 @@
         "#d44a3a"
       ],
       "datasource": "${DS_PROMETHEUS}",
-      "format": "none",
+      "format": "ms",
       "gauge": {
         "maxValue": 100,
         "minValue": 0,
@@ -549,7 +550,7 @@
       "nullPointMode": "connected",
       "nullText": null,
       "options": {},
-      "postfix": " Seconds",
+      "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
       "prefixFontSize": "50%",
@@ -565,12 +566,12 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "openstack_api_response_seconds{api_name=\"cinder\", cloud_name=\"$cloud\"}",
+          "expr": "openstack_api_response_milliseconds{api_name=\"cinder\", cloud_name=\"$cloud\"}",
           "instant": false,
           "refId": "A"
         }
       ],
-      "thresholds": "5,10",
+      "thresholds": "5000,10000",
       "timeFrom": null,
       "timeShift": null,
       "title": "Cinder API Avg Response Time",
@@ -595,7 +596,7 @@
         "#d44a3a"
       ],
       "datasource": "${DS_PROMETHEUS}",
-      "format": "none",
+      "format": "s",
       "gauge": {
         "maxValue": 100,
         "minValue": 0,
@@ -627,7 +628,7 @@
       "nullPointMode": "connected",
       "nullText": null,
       "options": {},
-      "postfix": " Seconds",
+      "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
       "prefixFontSize": "50%",
@@ -648,7 +649,7 @@
           "refId": "A"
         }
       ],
-      "thresholds": "5,10",
+      "thresholds": "8,12",
       "timeFrom": null,
       "timeShift": null,
       "title": "Horizon API Avg Response Time",
@@ -678,10 +679,10 @@
       "type": "row"
     },
     {
-      "content": "\n# Current Status\n\nAPIs marked as \"Good\" and in green have a current 10 minute average response time of below 5 seconds. \n\nAPIs marked as \"Degraded\" and in orange have a current 10 minute average response time of above 5 seconds and below 8 seconds.\n\nAPIs marked as \"Unusable\" and in red have a current 10 minute average response time above 8 seconds.\n\n\n",
+      "content": "\n# API Current Status\n\nAPIs marked as \"Good\" and in green have a current 10 minute average response time of below 5000 milliseconds. \n\nAPIs marked as \"Degraded\" and in orange have a current 10 minute average response time of above 5000 seconds and below 10000 milliseconds.\n\nAPIs marked as \"Unusable\" and in red have a current 10 minute average response time above 10000 milliseconds.\n\n# Horizon Current Status\n\nHorizon marked as \"Good\" and in green have a current 10 minute average response time of below 8 seconds. \n\nHorizon marked as \"Degraded\" and in orange have a current 10 minute average response time of above 8 seconds and below 12 seconds.\n\nHorizon marked as \"Unusable\" and in red have a current 10 minute average response time above 12 seconds.\n",
       "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
-        "h": 4,
+        "h": 8,
         "w": 12,
         "x": 0,
         "y": 21
@@ -718,7 +719,7 @@
         "h": 3,
         "w": 3,
         "x": 0,
-        "y": 25
+        "y": 29
       },
       "id": 11,
       "interval": null,
@@ -746,15 +747,15 @@
         {
           "from": "0",
           "text": "Good",
-          "to": "4.99"
-        },
-        {
-          "from": "5",
-          "text": "Degraded",
           "to": "7.99"
         },
         {
           "from": "8",
+          "text": "Degraded",
+          "to": "11.99"
+        },
+        {
+          "from": "12",
           "text": "Unusable",
           "to": "600"
         }
@@ -775,7 +776,7 @@
           "refId": "A"
         }
       ],
-      "thresholds": "5,8",
+      "thresholds": "8,12",
       "timeFrom": null,
       "timeShift": null,
       "title": "Horizon Response Time",
@@ -800,7 +801,7 @@
         "#d44a3a"
       ],
       "datasource": "${DS_PROMETHEUS}",
-      "format": "none",
+      "format": "ms",
       "gauge": {
         "maxValue": 100,
         "minValue": 0,
@@ -812,7 +813,7 @@
         "h": 3,
         "w": 3,
         "x": 3,
-        "y": 25
+        "y": 29
       },
       "id": 10,
       "interval": null,
@@ -840,17 +841,17 @@
         {
           "from": "0",
           "text": "Good",
-          "to": "4.99"
+          "to": "4999.99"
         },
         {
-          "from": "5",
+          "from": "5000",
           "text": "Degraded",
-          "to": "9.99"
+          "to": "9999.99"
         },
         {
-          "from": "10",
+          "from": "10000",
           "text": "Unusable",
-          "to": "600"
+          "to": "600000"
         }
       ],
       "sparkline": {
@@ -864,12 +865,12 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "avg_over_time(openstack_api_response_seconds{api_name=\"nova\", cloud_name=\"$cloud\"}[10m])",
+          "expr": "avg_over_time(openstack_api_response_milliseconds{api_name=\"nova\", cloud_name=\"$cloud\"}[10m])",
           "instant": true,
           "refId": "A"
         }
       ],
-      "thresholds": "5,10",
+      "thresholds": "5000,10000",
       "timeFrom": null,
       "timeShift": null,
       "title": "Nova API Response Time",
@@ -906,7 +907,7 @@
         "h": 3,
         "w": 3,
         "x": 6,
-        "y": 25
+        "y": 29
       },
       "id": 14,
       "interval": null,
@@ -934,17 +935,17 @@
         {
           "from": "0",
           "text": "Good",
-          "to": "4.99"
+          "to": "4999.99"
         },
         {
-          "from": "5",
+          "from": "5000",
           "text": "Degraded",
-          "to": "9.99"
+          "to": "9999.99"
         },
         {
-          "from": "10",
+          "from": "10000",
           "text": "Unusable",
-          "to": "600"
+          "to": "600000"
         }
       ],
       "sparkline": {
@@ -958,12 +959,12 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "avg_over_time(openstack_api_response_seconds{api_name=\"neutron\", cloud_name=\"$cloud\"}[10m])",
+          "expr": "avg_over_time(openstack_api_response_milliseconds{api_name=\"neutron\", cloud_name=\"$cloud\"}[10m])",
           "instant": true,
           "refId": "A"
         }
       ],
-      "thresholds": "5,10",
+      "thresholds": "5000,10000",
       "timeFrom": null,
       "timeShift": null,
       "title": "Neutron API Response Time",
@@ -1000,7 +1001,7 @@
         "h": 3,
         "w": 3,
         "x": 9,
-        "y": 25
+        "y": 29
       },
       "id": 18,
       "interval": null,
@@ -1028,17 +1029,17 @@
         {
           "from": "0",
           "text": "Good",
-          "to": "4.99"
+          "to": "4999.99"
         },
         {
-          "from": "5",
+          "from": "5000",
           "text": "Degraded",
-          "to": "9.99"
+          "to": "9999.99"
         },
         {
-          "from": "10",
+          "from": "10000",
           "text": "Unusable",
-          "to": "600"
+          "to": "600000"
         }
       ],
       "sparkline": {
@@ -1052,12 +1053,12 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "avg_over_time(openstack_api_response_seconds{api_name=\"cinder\", cloud_name=\"$cloud\"}[10m])",
+          "expr": "avg_over_time(openstack_api_response_milliseconds{api_name=\"cinder\", cloud_name=\"$cloud\"}[10m])",
           "instant": true,
           "refId": "A"
         }
       ],
-      "thresholds": "5,10",
+      "thresholds": "5000,10000",
       "timeFrom": null,
       "timeShift": null,
       "title": "Cinder API Response Time",
@@ -1094,7 +1095,7 @@
         "h": 3,
         "w": 3,
         "x": 0,
-        "y": 28
+        "y": 32
       },
       "id": 12,
       "interval": null,
@@ -1188,7 +1189,7 @@
         "h": 3,
         "w": 3,
         "x": 3,
-        "y": 28
+        "y": 32
       },
       "id": 13,
       "interval": null,
@@ -1282,7 +1283,7 @@
         "h": 3,
         "w": 3,
         "x": 6,
-        "y": 28
+        "y": 32
       },
       "id": 15,
       "interval": null,
@@ -1376,7 +1377,7 @@
         "h": 3,
         "w": 3,
         "x": 9,
-        "y": 28
+        "y": 32
       },
       "id": 19,
       "interval": null,
@@ -1455,7 +1456,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 31
+        "y": 35
       },
       "id": 28,
       "panels": [],
@@ -1474,7 +1475,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 32
+        "y": 36
       },
       "id": 30,
       "legend": {
@@ -1560,7 +1561,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 32
+        "y": 36
       },
       "id": 31,
       "legend": {
@@ -1646,7 +1647,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 40
+        "y": 44
       },
       "id": 32,
       "legend": {
@@ -1732,7 +1733,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 40
+        "y": 44
       },
       "id": 33,
       "legend": {
@@ -1813,7 +1814,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 48
+        "y": 52
       },
       "id": 6,
       "panels": [],
@@ -1832,7 +1833,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 49
+        "y": 53
       },
       "id": 2,
       "legend": {
@@ -1860,7 +1861,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "openstack_api_response_seconds{api_name=\"nova\", cloud_name=\"$cloud\"}",
+          "expr": "openstack_api_response_milliseconds{api_name=\"nova\", cloud_name=\"$cloud\"}",
           "legendFormat": "{{ app }}",
           "refId": "A"
         }
@@ -1885,7 +1886,8 @@
       },
       "yaxes": [
         {
-          "format": "short",
+          "decimals": 1,
+          "format": "ms",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -1918,7 +1920,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 49
+        "y": 53
       },
       "id": 16,
       "legend": {
@@ -1946,7 +1948,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "openstack_api_response_seconds{api_name=\"neutron\", cloud_name=\"$cloud\"}",
+          "expr": "openstack_api_response_milliseconds{api_name=\"neutron\", cloud_name=\"$cloud\"}",
           "legendFormat": "{{ app }}",
           "refId": "A"
         }
@@ -1971,7 +1973,7 @@
       },
       "yaxes": [
         {
-          "format": "short",
+          "format": "ms",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -1979,7 +1981,7 @@
           "show": true
         },
         {
-          "format": "short",
+          "format": "ms",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -2004,7 +2006,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 58
+        "y": 62
       },
       "id": 17,
       "legend": {
@@ -2032,7 +2034,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "openstack_api_response_seconds{api_name=\"cinder\", cloud_name=\"$cloud\"}",
+          "expr": "openstack_api_response_milliseconds{api_name=\"cinder\", cloud_name=\"$cloud\"}",
           "legendFormat": "{{ app }}",
           "refId": "A"
         }
@@ -2057,7 +2059,7 @@
       },
       "yaxes": [
         {
-          "format": "short",
+          "format": "ms",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -2065,7 +2067,7 @@
           "show": true
         },
         {
-          "format": "short",
+          "format": "ms",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -2090,7 +2092,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 58
+        "y": 62
       },
       "id": 4,
       "legend": {
@@ -2143,7 +2145,7 @@
       },
       "yaxes": [
         {
-          "format": "short",
+          "format": "s",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -2151,7 +2153,7 @@
           "show": true
         },
         {
-          "format": "short",
+          "format": "s",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -2171,7 +2173,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 67
+        "y": 71
       },
       "id": 60,
       "panels": [],
@@ -2190,7 +2192,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 68
+        "y": 72
       },
       "id": 62,
       "legend": {
@@ -2244,7 +2246,7 @@
       },
       "yaxes": [
         {
-          "format": "short",
+          "format": "s",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -2252,7 +2254,7 @@
           "show": true
         },
         {
-          "format": "short",
+          "format": "s",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -2276,14 +2278,14 @@
         "allValue": null,
         "current": {},
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "label_values(openstack_api_response_seconds, cloud_name)",
+        "definition": "label_values(openstack_api_status, cloud_name)",
         "hide": 0,
         "includeAll": false,
         "label": "Cloud",
         "multi": false,
         "name": "cloud",
         "options": [],
-        "query": "label_values(openstack_api_response_seconds, cloud_name)",
+        "query": "label_values(openstack_api_status, cloud_name)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -2317,5 +2319,5 @@
   "timezone": "",
   "title": "Openstack Health",
   "uid": "so14pR0Mz",
-  "version": 7
+  "version": 11
 }
