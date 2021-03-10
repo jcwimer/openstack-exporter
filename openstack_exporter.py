@@ -81,7 +81,7 @@ def parse_cli_arguments():
 
 if __name__ == '__main__':
     print("Starting server on port 8000")
-    prom.start_http_server(8000)
+    prom.start_http_server(port=8000, addr='0.0.0.0')
     args = parse_cli_arguments()
     while True:
         try:
